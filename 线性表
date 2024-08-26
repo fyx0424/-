@@ -1,35 +1,24 @@
-#include <iostream>
-using namespace std;
-#define MAXSIZE 0x3f3f3f3f
-//class list
-//{
-//public:
-//		int len;
-//		int a;
-//private:
-//	
-//
-//};
-//ÏßĞÔ±í¶¨Òå
+
+//çº¿æ€§è¡¨å®šä¹‰
 struct sqlist
 {
-	int* elem;//±íÍ·
-	int length;//³¤¶È
+	int* elem;//è¡¨å¤´
+	int length;//é•¿åº¦
 };
-//ÏßĞÔ±í³õÊ¼»¯
+//çº¿æ€§è¡¨åˆå§‹åŒ–
 bool initlist(sqlist& l)
 {
-	l.elem = new int[MAXSIZE];//ÔÚ¶ÑÇø¿ª±ÙÄÚ´æ
+	l.elem = new int[MAXSIZE];//åœ¨å †åŒºå¼€è¾Ÿå†…å­˜
 	if (!l.elem)
 	{
 		cout << "error" << endl;
 		return false;
 	}
-	l.length = 0;//Éè¶¨ÏßĞÔ±í³¤¶ÈÎª0;
+	l.length = 0;//è®¾å®šçº¿æ€§è¡¨é•¿åº¦ä¸º0;
 	return 1;
 
 }
-//ÏßĞÔ±íµÄÏú»Ù
+//çº¿æ€§è¡¨çš„é”€æ¯
 void destorylist(sqlist& l)
 {
 	if (l.elem)
@@ -37,17 +26,17 @@ void destorylist(sqlist& l)
 		delete l.elem;
 	}
 }
-//ÏßĞÔ±íµÄÇå¿Õ
+//çº¿æ€§è¡¨çš„æ¸…ç©º
 void clearlist(sqlist &l)
 {
 	l.length = 0;
 }
-//ÅĞ¶ÏÏßĞÔ±íÊÇ·ñÎª¿Õ
+//åˆ¤æ–­çº¿æ€§è¡¨æ˜¯å¦ä¸ºç©º
 bool isempty(const sqlist& l)
 {
 	return static_cast<bool>(l.length);
 }
-//ÏßĞÔ±íµÄÈ¡Öµ
+//çº¿æ€§è¡¨çš„å–å€¼
 bool getelem(const sqlist& l, const size_t i, int &e)
 {
 	if (i<1 || i>MAXSIZE)
@@ -58,22 +47,22 @@ bool getelem(const sqlist& l, const size_t i, int &e)
 	e = l.elem[i - 1];
 	return true;
 }
-//ÏßĞÔ±íµÄ²éÕÒ
+//çº¿æ€§è¡¨çš„æŸ¥æ‰¾
 int locatelist(const sqlist& l, const int& e)
 {
 	for (int i = 0; i < l.length; ++i)
 	{
 		if (l.elem[i] == e)
 		{
-			return i + 1;//²éÕÒ³É¹¦£¬·µ»ØÆä²éÕÒÔªËØµÄµÚÒ»¸öÏÂ±êÖµ
+			return i + 1;//æŸ¥æ‰¾æˆåŠŸï¼Œè¿”å›å…¶æŸ¥æ‰¾å…ƒç´ çš„ç¬¬ä¸€ä¸ªä¸‹æ ‡å€¼
 		}
    }
 	return 0;
 }
-//ÏßĞÔ±íµÄ²åÈë
+//çº¿æ€§è¡¨çš„æ’å…¥
 bool insertlist(sqlist& l, const int& e, const int& i)
 {
-	//ÅĞ¶ÏÏßĞÔ±í³¤¶ÈÊÇ·ñĞ¡ÓÚ×î´ó³¤¶ÈMAXSIZE
+	//åˆ¤æ–­çº¿æ€§è¡¨é•¿åº¦æ˜¯å¦å°äºæœ€å¤§é•¿åº¦MAXSIZE
 	if (l.length == MAXSIZE)
 	{
 		cout << "not" << endl;
@@ -86,23 +75,23 @@ bool insertlist(sqlist& l, const int& e, const int& i)
 	}
 	if (l.length > 0)
 	{
-		//½«Î»ÓÚ²åÈëÎ»ÖÃÖ®ºóµÄÔªËØÒÀ´ÎÏòºóÅ²¶¯Ò»Î»
+		//å°†ä½äºæ’å…¥ä½ç½®ä¹‹åçš„å…ƒç´ ä¾æ¬¡å‘åæŒªåŠ¨ä¸€ä½
 		for (int p = l.length - 1; p >= i; --p)
 		{
 			l.elem[p + 1] = l.elem[p];
 		}
 	}
-	//²åÈëÔªËØ
+	//æ’å…¥å…ƒç´ 
 	l.elem[i] = e;
-	//ÏßĞÔ±í³¤¶È+1
+	//çº¿æ€§è¡¨é•¿åº¦+1
 	l.length += 1;
 	return true;
 
 }
-//ÏßĞÔ±íµÄÉ¾³ı
+//çº¿æ€§è¡¨çš„åˆ é™¤
 bool eraselist(sqlist& l, const int& i)
 {
-	//Òì³£ÅĞ¶Ï
+	//å¼‚å¸¸åˆ¤æ–­
 	if (i<0 || i>l.length)
 	{
 		cout << "not" << endl;
@@ -113,15 +102,11 @@ bool eraselist(sqlist& l, const int& i)
 		cout << "not" << endl;
 		return false;
 	}
-	//½«Î»ÓÚÉ¾³ıÎ»ÖÃÖ®ºóµÄÔªËØÒÀ´ÎÏòÇ°Å²¶¯Ò»Î»
+	//å°†ä½äºåˆ é™¤ä½ç½®ä¹‹åçš„å…ƒç´ ä¾æ¬¡å‘å‰æŒªåŠ¨ä¸€ä½
 	for (int p = i + 1; p < l.length; ++p)
 	{
 		l.elem[p - 1] = l.elem[p];
 	}
 	l. length -= 1;
 	return true;
-}
-int main()
-{
-
 }
